@@ -164,8 +164,10 @@ bindsym Print exec flameshot gui --clipboard --path ~/Pictures/flameshot
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
-bindcode 133+86 exec playerctl volume $(($(playerctl volume) + 0.1))
-bindcode 133+82 exec playerctl volume $(($(playerctl volume) - 0.1))
+bindsym XF86AudioMute exec amixer sset 'Master' toggle
+bindsym XF86AudioLowerVolume exec amixer sset 'Master' 5%-
+bindsym XF86AudioRaiseVolume exec amixer sset 'Master' 5%+
+
 
 
 

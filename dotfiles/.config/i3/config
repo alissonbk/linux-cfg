@@ -46,7 +46,7 @@ bindsym $mod+Ctrl+Return exec rofi -show drun -replace -i
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
-bindsym $mod+l focus up
+#bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
@@ -160,6 +160,9 @@ bindsym $mod+r exec google-chrome-stable
 #Printscreen
 bindsym Print exec flameshot gui --clipboard --path ~/Pictures/flameshot
 
+# Lock
+bindsym $mod+L exec i3lock -t -i ~/Pictures/japan-tokyo-urban.png
+
 #Playerctl
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
@@ -176,3 +179,4 @@ bindsym XF86AudioRaiseVolume exec amixer sset 'Master' 5%+
 bar {
         status_command i3status
 }
+

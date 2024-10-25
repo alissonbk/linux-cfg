@@ -26,6 +26,11 @@ font pango:DejaVu Sans Mono 9
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# Exec allways
+exec_always sh ~/Apps/set-display.sh
+exec_always picom &
+exec_always nitrogen --restore
+
 # start a terminal
 #bindsym $mod+t exec i3-sensible-terminal
 bindsym $mod+t exec gnome-terminal

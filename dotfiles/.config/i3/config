@@ -28,9 +28,8 @@ floating_modifier $mod
 
 # Exec allways
 exec_always sh ~/Apps/set-display.sh
-exec_always picom --config ~/.config/picom.conf &
+exec_always picom &
 exec_always nitrogen --restore
-#exec_always feh --bg-fill ~/Pictures/japan-night-cherry.jpg
 
 # start a terminal
 #bindsym $mod+t exec i3-sensible-terminal

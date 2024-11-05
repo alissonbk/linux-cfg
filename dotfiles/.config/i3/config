@@ -10,6 +10,9 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $main_display DisplayPort-1
+set $secondary_display HDMI-A-0
+
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -26,6 +29,13 @@ font pango:DejaVu Sans Mono 9
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# Set static workspace for display
+workspace 1 output $secondary_display
+workspace 2 output $main_display
+workspace 3 output $main_display
+workspace 4 output $main_display
+
+
 # Exec allways
 exec_always sh ~/Apps/set-display.sh
 exec_always picom &
@@ -34,7 +44,7 @@ exec_always nitrogen --restore
 
 # start a terminal
 #bindsym $mod+t exec i3-sensible-terminal
-bindsym $mod+t exec gnome-terminal
+bindsym $mod+t exec terminator
 
 
 # kill focused window
@@ -99,6 +109,10 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+# Toggle between both monitors 
+# (focus output left wraps from the leftmost to the rightmost output)
+bindsym $mod+Tab focus output left
+
 # switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -157,7 +171,7 @@ mode "resize" {
 bindsym $mod+Ctrl+r mode "resize"
 
 # Applications
-bindsym $mod+E exec nautilus 
+bindsym $mod+E exec nemo 
 bindsym $mod+Ctrl+E exec rofi -show emoji 
 bindsym $mod+C exec rofi -show calc -modi calc -no-show-match -no-sort 
 bindsym $mod+r exec google-chrome-stable

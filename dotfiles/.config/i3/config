@@ -40,6 +40,7 @@ workspace 4 output $main_display
 exec_always sh ~/Apps/set-display.sh
 exec_always picom &
 exec_always nitrogen --restore
+#exec_always feh --bg-fill ~/Pictures/japan-night-cherry.jpg
 
 # start a terminal
 #bindsym $mod+t exec i3-sensible-terminal
@@ -172,7 +173,6 @@ bindsym $mod+Ctrl+r mode "resize"
 # Applications
 bindsym $mod+E exec nemo 
 bindsym $mod+Ctrl+E exec rofi -show emoji 
-# rofi-calc
 bindsym $mod+C exec rofi -show calc -modi calc -no-show-match -no-sort 
 bindsym $mod+r exec google-chrome-stable
 

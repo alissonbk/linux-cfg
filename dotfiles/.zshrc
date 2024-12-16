@@ -1,42 +1,50 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# Use powerline
+USE_POWERLINE="true"
+# Has weird character width
+# Example:
+#    is not a diamond
+HAS_WIDECHARS="false"
+# Source manjaro-zsh-configuration
+if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
+  source /usr/share/zsh/manjaro-zsh-config
+fi
+# Use manjaro zsh prompt
+if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
+  source /usr/share/zsh/manjaro-zsh-prompt
 fi
 
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/alisson/.zshrc'
+#NVM
+source /usr/share/nvm/init-nvm.sh
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+# ANDROID_HOME
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/emulator
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#python Venv
+alias venv="source ~/Apps/Venvs/default/bin/activate"
+
+#aliases
+alias tsinit="sh /home/zeit/Apps/tsinit.sh"
+alias g="googler"
+alias crun="sh ~/Apps/cRunner.sh"
+alias bfmt="numfmt --to=iec-i --suffix=B --format=\"%9.2f\""
+alias dblog="sh ~/Apps/pgLogs.sh"
+alias postman-agent="exec ~/Apps/postman-agent/agent"
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
 
 
-# keys to home, end and del
-bindkey  "^[[H"   beginning-of-line
-bindkey  "^[[F"   end-of-line
-bindkey  "^[[3~"  delete-char
 
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
-neofetch
-
-#Darkmode
-export GTK_THEME=Arc-Dark
-# Set QT to use dark mode
-export QT_QPA_PLATFORMTHEME=qt5ct
-export GTK2_RC_FILES=/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc
-export QT_STYLE_OVERRIDE=Adwaita-Dark
+# BEGIN opam configuration
+# This is useful if you're using opam as it adds:
+#   - the correct directories to the PATH
+#   - auto-completion for the opam binary
+# This section can be safely removed at any time if needed.
+[[ ! -r '/home/zeit/.opam/opam-init/init.zsh' ]] || source '/home/zeit/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
+# END opam configuration
 
 # Home, End, Del, Ctrl left, Ctrl right
 bindkey  "^[[H"   beginning-of-line
@@ -44,3 +52,6 @@ bindkey  "^[[F"   end-of-line
 bindkey  "^[[3~"  delete-char
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+
+#fzf
+source <(fzf --zsh)

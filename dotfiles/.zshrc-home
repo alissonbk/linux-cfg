@@ -26,3 +26,21 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 bindkey  "^[[H"   beginning-of-line
 bindkey  "^[[F"   end-of-line
 bindkey  "^[[3~"  delete-char
+
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+neofetch
+
+#Darkmode
+export GTK_THEME=Arc-Dark
+# Set QT to use dark mode
+export QT_QPA_PLATFORMTHEME=qt5ct
+export GTK2_RC_FILES=/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc
+export QT_STYLE_OVERRIDE=Adwaita-Dark
+
+# Home, End, Del, Ctrl left, Ctrl right
+bindkey  "^[[H"   beginning-of-line
+bindkey  "^[[F"   end-of-line
+bindkey  "^[[3~"  delete-char
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 npx npm init;
-npx npm install -D ts-node typescript @types/node;
+npx npm install -D tsx typescript @types/node;
 npx tsc --init
 touch index.ts;
 echo "console.log(\"hello world\")" > index.ts;

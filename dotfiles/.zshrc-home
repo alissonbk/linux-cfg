@@ -26,6 +26,10 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 bindkey  "^[[H"   beginning-of-line
 bindkey  "^[[F"   end-of-line
 bindkey  "^[[3~"  delete-char
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
+
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
@@ -38,9 +42,24 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 export GTK2_RC_FILES=/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc
 export QT_STYLE_OVERRIDE=Adwaita-Dark
 
-# Home, End, Del, Ctrl left, Ctrl right
-bindkey  "^[[H"   beginning-of-line
-bindkey  "^[[F"   end-of-line
-bindkey  "^[[3~"  delete-char
-bindkey "^[[1;5C" forward-word
-bindkey "^[[1;5D" backward-word
+# Home, End, Del, Ctrl left, Ctrl righ
+#   - the correct directories to the PATH
+#   - auto-completion for the opam binary
+# This section can be safely removed at any time if needed.
+[[ ! -r '/home/alisson/.opam/opam-init/init.zsh' ]] || source '/home/alisson/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
+# END opam configuration
+source /usr/share/nvm/init-nvm.sh
+
+
+#fzf
+source <(fzf --zsh)
+
+
+#Aliases
+alias tsinit="sh ~/Apps/tsinit.sh"
+alias g="googler"
+alias crun="sh ~/Apps/cRunner.sh"
+alias bfmt="numfmt --to=iec-i --suffix=B --format=\"%9.2f\""
+alias dblog="sh ~/Apps/pgLogs.sh"
+alias postman-agent="exec ~/Apps/postman-agent/agent"
+

@@ -23,17 +23,19 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 
 # keys to home, end and del
-bindkey  "^[[H"   beginning-of-line
-bindkey  "^[[F"   end-of-line
 bindkey  "^[[3~"  delete-char
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+bindkey '\e[H' beginning-of-line   # Home
+bindkey '\e[F' end-of-line         # End
+bindkey '\e[1~' beginning-of-line
+bindkey '\e[4~' end-of-line
 
 
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
-neofetch
+#neofetch
 
 #Darkmode
 export GTK_THEME=Arc-Dark

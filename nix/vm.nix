@@ -13,6 +13,9 @@ let
   username = "alisson";
 in
 {
+  imports = [
+    ./zsh
+  ];
 
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
@@ -59,6 +62,7 @@ in
   users.users.${username} = {
     isNormalUser = true;
     description = username;
+    shell = pkgs.zsh;
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -146,6 +150,11 @@ in
     pulsemixer
     spotify
     gnome-calculator
+    bat
+    batdiff
+    batgrep
+    batman
+    eza
   ];
 
   services.picom = {

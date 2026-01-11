@@ -23,10 +23,6 @@
         src = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/";
         file = "powerlevel10k.zsh-theme";
       }
-      {
-        name = "cd-gitroot";
-        src = "${pkgs.cd-gitroot}/share/zsh/cd-gitroot";
-      }
     ];
 
     initExtraFirst = ''
@@ -62,7 +58,9 @@
       bindkey '\e[F' end-of-line         # End
       bindkey '\e[1~' beginning-of-line
       bindkey '\e[4~' end-of-line
-      bindkey '^ ' autosuggest-accept   # ctrl+space        
+      bindkey '^ ' autosuggest-accept   # ctrl+space    
+
+      typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet   
 
       # Exports
       export JAVA_HOME=/usr/lib/jvm/default 

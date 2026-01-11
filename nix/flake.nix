@@ -3,12 +3,25 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    { nixpkgs, self, ... }:
+    {
+      nixpkgs,
+      home-manager,
+      self,
+      ...
+    }:
     let
+      lib = nixpkgs.lib;
       system = "x86_64-linux";
+      pkgs = import nixpkgs { inherit system; };
+      username = "alissonbk";
     in
     {
       apps.${system} = {
@@ -18,8 +31,16 @@
         };
       };
       nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
-        system = system;
-        modules = [ ./vm.nix ];
+        inherit system;
+        modules = [
+          ./vm.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${username} = import ./home.nix;
+          }
+        ];
       };
     };
 }

@@ -10,13 +10,9 @@
   ...
 }:
 let
-  username = "alisson";
+  username = "alissonbk";
 in
 {
-  imports = [
-    ./zsh
-  ];
-
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
 
@@ -58,25 +54,18 @@ in
     ];
   };
 
+  users.groups.${username} = { };
+
   # User with wheel permission
   users.users.${username} = {
     isNormalUser = true;
     description = username;
+    group = username;
     shell = pkgs.zsh;
+    ignoreShellProgramCheck = true; # because the shell is imported from the home.nix
     extraGroups = [
       "networkmanager"
       "wheel"
-    ];
-    packages = with pkgs; [
-      firefox
-      google-chrome
-      thunderbird
-      discord
-      kubectl
-      docker
-      vscode
-      jetbrains-toolbox
-      alacritty
     ];
   };
   security.sudo.wheelNeedsPassword = false;
@@ -144,17 +133,31 @@ in
     qemu_kvm
     nitrogen
     redshift
-    terminator
     flameshot
     i3lock
     pulsemixer
     spotify
     gnome-calculator
+    htop
     bat
-    batdiff
-    batgrep
-    batman
+    bat-extras.batdiff
+    bat-extras.batman
+    bat-extras.batgrep
     eza
+    discord
+    unzip
+    zip
+    ripgrep
+    kubectl
+    podman
+    fzf
+  ];
+
+  fonts.packages = with pkgs; [
+    dejavu_fonts
+    meslo-lgs-nf
+    # fira-code
+    noto-fonts
   ];
 
   services.picom = {
@@ -175,5 +178,5 @@ in
     };
   };
 
-  system.stateVersion = "26.05";
+  system.stateVersion = "25.11";
 }

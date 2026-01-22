@@ -34,7 +34,7 @@ alias crun="sh ~/Apps/cRunner.sh"
 alias bfmt="numfmt --to=iec-i --suffix=B --format=\"%9.2f\""
 alias dblog="sh ~/Apps/pgLogs.sh"
 alias get_idf=". /opt/esp-idf/export.sh"
-alias kill-monitor="ps -ef | grep "idf.py monitor" | awk 'NR==1 {print $2}' | xargs -I {} kill -9 {}"
+alias kill-monitor="ps -ef | grep \"idf.py monitor\" | awk 'NR==1 {print \$2}' | xargs -I {} kill -9 {}"
 #alias postman-agent="exec ~/Apps/postman-agent/agent"
 
 alias prod-nix="ssh zeit@193.123.113.29"

@@ -21,6 +21,9 @@ export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$ANDROID_HOME/emulator
 
+# PlatformIO
+export PATH=$PATH:/home/zeit/.platformio/penv/bin
+
 #python Venv
 alias venv="source ~/Apps/Venvs/default/bin/activate"
 
@@ -30,7 +33,11 @@ alias g="googler"
 alias crun="sh ~/Apps/cRunner.sh"
 alias bfmt="numfmt --to=iec-i --suffix=B --format=\"%9.2f\""
 alias dblog="sh ~/Apps/pgLogs.sh"
-alias postman-agent="exec ~/Apps/postman-agent/agent"
+alias get_idf=". /opt/esp-idf/export.sh"
+alias kill-monitor="ps -ef | grep "idf.py monitor" | awk 'NR==1 {print $2}' | xargs -I {} kill -9 {}"
+#alias postman-agent="exec ~/Apps/postman-agent/agent"
+
+alias prod-nix="ssh zeit@193.123.113.29"
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
@@ -53,5 +60,8 @@ bindkey  "^[[3~"  delete-char
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
+export EDITOR="code --wait"
+
 #fzf
 source <(fzf --zsh)
+JAVA_HOME=/usr/lib/jvm/java-17-openjdk

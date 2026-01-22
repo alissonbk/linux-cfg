@@ -1,0 +1,10 @@
+{
+  "idf.pythonInstallPath": "/home/alisson/.espressif/python_env/idf5.3_py3.14_env/bin/python",
+  "clangd.path": "/home/alisson/.espressif/tools/esp-clang/16.0.1-fe4f10a809/esp-clang/bin/clangd",
+  "clangd.arguments": [
+    "--background-index",
+    "--query-driver=**",
+    "--compile-commands-dir=/tmp/hello_world/build"
+  ]
+}
+

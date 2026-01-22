@@ -56,6 +56,11 @@ source /usr/share/nvm/init-nvm.sh
 #fzf
 source <(fzf --zsh)
 
+#rust binaries
+#export PATH=$PATH:/home/alisson/.cargo/bin
+
+# default jvm from archlinux-java
+export JAVA_HOME=/usr/lib/jvm/default 
 
 #Aliases
 alias tsinit="sh ~/Apps/tsinit.sh"
@@ -64,4 +69,12 @@ alias crun="sh ~/Apps/cRunner.sh"
 alias bfmt="numfmt --to=iec-i --suffix=B --format=\"%9.2f\""
 alias dblog="sh ~/Apps/pgLogs.sh"
 alias postman-agent="exec ~/Apps/postman-agent/agent"
+alias get_idf='. $HOME/esp/esp-idf/export.sh'
+alias kill_monitor='sh ~/Apps/kill-idf-monitor.sh'
 
+export EDITOR="code --wait"
+
+alias ls='ls --color=auto'
+
+
+source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh

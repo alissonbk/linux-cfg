@@ -49,4 +49,11 @@ in
 
   # File configs
   home.file.".config/terminator/config".text = builtins.readFile ./terminatorconfig;
+
+  # Apps folder
+  home.activation.installApps = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    mkdir -p "$HOME/Apps"
+    cp -r ${../scripts}/. "$HOME/Apps/"
+    chmod +0755 "$HOME/Apps"
+  '';
 }

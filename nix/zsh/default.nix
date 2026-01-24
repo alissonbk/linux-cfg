@@ -68,7 +68,7 @@
 
 
       # fzf
-      source < (fzf - -zsh)
+      #source < (fzf - -zsh)
 
     '';
 

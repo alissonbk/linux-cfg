@@ -63,5 +63,5 @@ bindkey "^[[1;5D" backward-word
 export EDITOR="code --wait"
 
 #fzf
-source <(fzf --zsh)
+#source <(fzf --zsh)
 JAVA_HOME=/usr/lib/jvm/java-17-openjdk

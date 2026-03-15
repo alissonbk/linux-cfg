@@ -26,13 +26,19 @@ services:
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
     container_name: flaresolverr
+    networks:
+      - idc
     #network_mode: service:gluetun
+    ports:
+      - 8091:8091
     environment:
       - LOG_LEVEL=info
     restart: always
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
+    networks:
+      - idc
     ports:
       - 9696:9696
     #network_mode: service:gluetun
@@ -41,8 +47,10 @@ services:
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
+    networks:
+      - idc
     ports:
-      - 8989:8989
+      - 0.0.0.0:8989:8989
     #network_mode: service:gluetun
     environment: 
       - PUID=1000
@@ -55,8 +63,10 @@ services:
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
+    networks:
+      - idc
     ports:
-      - 7878:7878
+      - 0.0.0.0:7878:7878
     #network_mode: service:gluetun
     environment:
     - PUID=1000
@@ -65,17 +75,22 @@ services:
     volumes:
     - /docker/appdata/radarr:/config
     - /datastore/data:/data
+    - /datastore/data/torrents:/downloads
     restart: always
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
+    networks:
+      - idc
     ports:
-      - 9090:8080
+      - 0.0.0.0:9090:9090
+      - 0.0.0.0:6881:6881
     #network_mode: service:gluetun
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/Chicago
+      - WEBUI_PORT=9090
     volumes:
       - /docker/appdata/qbittorrent:/config
       - /datastore/data/torrents:/downloads
@@ -84,6 +99,8 @@ services:
     image: ghcr.io/thijmengthn/swaparr:latest
     container_name: swaparr-radarr
     #network_mode: service:gluetun
+    networks:
+      - idc
     restart: always
     environment:
       - BASEURL=http://127.0.0.1:7878 # IP or FQDN           (Required)
@@ -99,6 +116,8 @@ services:
   swaparr-sonarr: 
     image: ghcr.io/thijmengthn/swaparr:latest
     container_name: swaparr-sonarr
+    networks:
+      - idc
     #network_mode: service:gluetun
     restart: always
     environment:
@@ -114,11 +133,13 @@ services:
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
+    networks:
+      - idc
     devices:
       - /dev/dri:/dev/dri
     ports:
-      - 8096:8096        # HTTP
-      - 8920:8920        # HTTPS (optional)
+      - 0.0.0.0:8096:8096        # HTTP
+      - 0.0.0.0:8920:8920        # HTTPS (optional)
     environment:
       - PUID=1000
       - PGID=1000
@@ -127,3 +148,11 @@ services:
       - /docker/appdata/jellyfin:/config
       - /datastore/data:/data
     restart: unless-stopped
+
+
+networks:
+  idc:
+    driver: bridge
+    #driver_opts:
+    #  com.docker.network.bridge.host_binding_ipv4: "127.0.0.1"
+

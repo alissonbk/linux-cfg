@@ -38,7 +38,7 @@ workspace 4 output $main_display
 
 # Exec allways
 exec_always sh ~/Apps/set-display.sh
-exec_always picom &
+#exec_always picom &
 exec_always nitrogen --restore
 exec_always redshift -x; redshift -O 4500
 

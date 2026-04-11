@@ -68,7 +68,9 @@ in
         i3lock
         i3blocks
       ];
+      configFile = null;
     };
+    displayManager.defaultSession = "none+i3";
     displayManager.lightdm = {
       enable = true;
       greeters.gtk = {
@@ -79,14 +81,15 @@ in
       };
     };
   };
-  # services.displayManager = {
-  #   defaultSession = "none+i3";
-  # };
-  console.keyMap = "br-abnt2";
+  # System-level i3 for session only (config handled by Home Manager)
+  console.keyMap = "us";
+
   services.xserver.xkb = {
-    layout = "br";
-    variant = "abnt2";
+    layout = "us";
+    variant = "altgr-intl";
+    #options = "altwin:swap_alt_win";
   };
+
   programs.dconf.enable = true;
   services.xserver.windowManager.i3.package = pkgs.i3;
   services.printing.enable = true; # Enable CUPS to print documents.
@@ -107,7 +110,7 @@ in
     vim
     curl
     cmatrix
-    neofetch
+    fastfetch
     rofi
     thunar
     htop
@@ -143,6 +146,10 @@ in
     git-credential-oauth
     adwaita-icon-theme
     gnome-themes-extra
+    dmenu
+    i3status
+    i3lock
+    i3blocks
   ];
 
   fonts.packages = with pkgs; [
@@ -157,24 +164,24 @@ in
   hardware.graphics.enable = true;
   hardware.bluetooth.enable = true;
 
-  services.picom = {
-    enable = true;
-    fade = true;
-    vSync = true;
-    shadow = true;
-    fadeDelta = 4;
-    inactiveOpacity = 0.8;
-    activeOpacity = 1;
-    # glx - xrender
-    backend = "glx";
-    settings = {
-      blur = {
-        method = "dual_kawase";
-        background = true;
-        strength = 5;
-      };
-    };
-  };
+  # services.picom = {
+  #   enable = true;
+  #   fade = true;
+  #   vSync = true;
+  #   shadow = true;
+  #   fadeDelta = 4;
+  #   inactiveOpacity = 0.8;
+  #   activeOpacity = 1;
+  #   # glx - xrender
+  #   backend = "glx";
+  #   settings = {
+  #     blur = {
+  #       method = "dual_kawase";
+  #       background = true;
+  #       strength = 5;
+  #     };
+  #   };
+  # };
 
   system.stateVersion = "25.11";
 }

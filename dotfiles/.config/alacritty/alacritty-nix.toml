@@ -1,0 +1,6 @@
+[window]
+opacity = 0.4  # Set between 0.0 (transparent) and 1.0 (opaque)
+blur = true
+
+[font.normal]
+family = "MesloLGS NF"

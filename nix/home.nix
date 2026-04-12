@@ -61,6 +61,8 @@ in
     }
 
     copy_file "${./i3config}" ".config/i3/config"
+    mkdir -p "$HOME/.config/alacritty"
+    copy_file "${../dotfiles/.config/alacritty/alacritty-nix.toml}" ".config/alacritty/alacritty.toml"
     copy_dir "${../scripts}"    "Apps"
     copy_dir "${../wallpapers}" "wallpapers"
   '';

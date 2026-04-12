@@ -14,7 +14,7 @@ in
   home.username = username;
   home.homeDirectory = lib.mkForce "/home/${username}";
 
-  home.stateVersion = "25.11";
+  home.stateVersion = "26.05";
 
   programs.home-manager.enable = true;
 
@@ -30,19 +30,14 @@ in
     git
   ];
 
-  # i3 (user-level configuration)
-  xdg.configFile."i3/config" = {
-    source = ./i3config;
+  # Picom
+  services.picom = {
+    enable = true;
+    fade = true;
+    shadow = true;
+    inactiveOpacity = 0.8;
+    settings.blur.strength = 5;
   };
-
-  # Picom belongs here (user compositor)
-  # services.picom = {
-  #   enable = true;
-  #   fade = true;
-  #   shadow = true;
-  #   inactiveOpacity = 0.8;
-  #   settings.blur.strength = 5;
-  # };
 
   # File configs
   #home.file.".config/terminator/config".text = builtins.readFile ./terminatorconfig;
@@ -50,16 +45,23 @@ in
     enable = true;
   };
 
+  home.activation.copyFiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    copy_dir() {
+      local src="$1" dest="$HOME/$2"
+      rm -rf "$dest"
+      mkdir -p "$dest"
+      cp -rT --no-preserve=mode "$src" "$dest"
+      chmod -R 755 "$dest"
+    }
+    copy_file() {
+      local src="$1" dest="$HOME/$2"
+      rm -rf "$dest"
+      cp -rT --no-preserve=mode "$src" "$dest"
+      chmod -R 755 "$dest"
+    }
 
-  home.activation.installApps = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    # Apps folder
-    mkdir -p "$HOME/Apps"
-    cp -r ${"../scripts"}/. "$HOME/Apps/"
-    chmod +0755 "$HOME/Apps"
-
-    # Wallpapers
-    mkdir -p "$HOME/wallpapers"
-    cp -r "$HOME/wallpapers/." "$HOME/wallpapers/"
-    chmod +0755 "$HOME/wallpapers"
+    copy_file "${./i3config}" ".config/i3/config"
+    copy_dir "${../scripts}"    "Apps"
+    copy_dir "${../wallpapers}" "wallpapers"
   '';
 }

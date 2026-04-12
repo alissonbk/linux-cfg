@@ -8,7 +8,7 @@
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     autocd = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     history.size = 10000;
     history.share = true;
 
@@ -77,10 +77,10 @@
       # Standard OMZ plugins pre-installed to $ZSH/plugins/
       # Custom OMZ plugins are added to $ZSH_CUSTOM/plugins/
       # Enabling too many plugins will slowdown shell startup
-      plugins = [
-        "git"
-        "sudo" # press Esc twice to get the previous command prefixed with sudo https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/sudo
-      ];
+      # plugins = [
+      #   "git"
+      #   "sudo"
+      # ];
       extraConfig = ''
         # Display red dots whilst waiting for completion.
         COMPLETION_WAITING_DOTS="true"
@@ -99,15 +99,13 @@
 
       #------------Navigation------------
       prj = "cd $HOME/projects";
-      scripts = "cd $HOME/Apps/scripts";
+      scripts = "cd $HOME/Apps";
       nixcfg = "cd $HOME/src/nix-config";
       l = "eza -lah";
       la = "eza -lah";
       ll = "eza -lh";
       ls = "eza";
       lsa = "eza -lah";
-
-      vim = "nvim";
 
       #-----------Others------------------
       get_idf = ". $HOME/esp/esp-idf/export.sh";

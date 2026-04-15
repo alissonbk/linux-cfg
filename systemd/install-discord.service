@@ -1,0 +1,11 @@
+[Unit]
+Description=Install discord
+After=network-online.target
+
+
+[Service]
+Type=oneshot
+ExecStart=/home/alisson/Apps/install-discord.sh
+
+[Install]
+WantedBy=default.target

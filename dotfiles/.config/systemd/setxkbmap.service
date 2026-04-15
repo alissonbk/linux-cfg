@@ -1,0 +1,11 @@
+[Unit]
+Description=Set keyboard layout to US AltGr Intl
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/setxkbmap -layout us -variant altgr-intl
+
+[Install]
+WantedBy=default.target

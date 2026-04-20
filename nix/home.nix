@@ -28,6 +28,51 @@ in
     #terminator
     alacritty
     git
+    dig
+    net-tools
+    wget
+    vim
+    curl
+    cmatrix
+    fastfetch
+    rofi
+    nitrogen
+    thunar
+    htop
+    git
+    sxiv
+    feh
+    lxappearance
+    imagemagick
+    zip
+    jq
+    unzip
+    qemu_kvm    
+    redshift
+    flameshot
+    pulsemixer
+    spotify
+    gnome-calculator
+    htop
+    bat
+    bat-extras.batdiff
+    bat-extras.batman
+    bat-extras.batgrep
+    eza
+    discord
+    unzip
+    zip
+    ripgrep
+    kubectl
+    podman
+    fzf
+    git-credential-oauth
+    adwaita-icon-theme
+    gnome-themes-extra
+    dejavu_fonts
+    meslo-lgs-nf    
+    noto-fonts
+    git-credential-oauth
   ];
 
   # Picom
@@ -44,6 +89,8 @@ in
   programs.alacritty = {
     enable = true;
   };
+
+  fonts.fontconfig.enable = true;
 
   home.activation.copyFiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     copy_dir() {

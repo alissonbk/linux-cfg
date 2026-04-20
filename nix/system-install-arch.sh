@@ -9,4 +9,6 @@ pacman -S xorg-server\
     dmenu\
     i3status\
     i3lock\
-    xterm
+    xterm;
+
+systemctl enable --now lightdm;

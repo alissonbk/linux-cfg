@@ -38,6 +38,7 @@ alias kill-monitor="ps -ef | grep \"idf.py monitor\" | awk 'NR==1 {print \$2}' |
 #alias postman-agent="exec ~/Apps/postman-agent/agent"
 
 alias prod-nix="ssh zeit@193.123.113.29"
+alias update-qualis="sh ~/Apps/update-qualis-sqlite.sh"
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)

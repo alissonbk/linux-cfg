@@ -1,1 +1,3 @@
-setxkbmap -layout us -variant altgr-intl -option altwin:swap_alt_win
+setxkbmap -layout us -variant altgr-intl 
+
+#-option altwin:swap_alt_win

@@ -9,6 +9,15 @@ pacman -S xorg-server\
     dmenu\
     i3status\
     i3lock\
-    xterm;
+    nix\
+    zsh\
+    i3-sensible-terminal;
 
 systemctl enable --now lightdm;
+
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager;
+nix-channel --update;
+
+nix-shell '<home-manager>' -A install;
+
+NIXPKGS_ALLOW_UNFREE=1 nix run github:nix-community/home-manager -- switch --impure --flake .#alissonbk

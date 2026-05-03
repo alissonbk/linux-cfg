@@ -1,0 +1,37 @@
+---
+- name: Enable and start NetworkManager
+  ansible.builtin.systemd:
+    name: NetworkManager
+    enabled: yes
+    state: started
+
+- name: Enable and start SSH daemon
+  ansible.builtin.systemd:
+    name: sshd
+    enabled: yes
+    state: started
+
+- name: Enable and start CUPS printing service
+  ansible.builtin.systemd:
+    name: cups
+    enabled: yes
+    state: started
+
+- name: Enable and start Bluetooth service
+  ansible.builtin.systemd:
+    name: bluetooth
+    enabled: yes
+    state: started
+
+- name: Enable and start libvirt (QEMU/KVM)
+  ansible.builtin.systemd:
+    name: libvirtd
+    enabled: yes
+    state: started
+
+- name: Enable gvfs for mount/trash support
+  ansible.builtin.systemd:
+    name: gvfs-daemon
+    enabled: yes
+    state: started
+  failed_when: false

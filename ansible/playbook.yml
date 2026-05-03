@@ -1,0 +1,23 @@
+---
+- name: Configure Arch Linux workstation
+  hosts: all
+  become: yes
+  vars:
+    username: alissonbk
+    user_home: "/home/{{ username }}"
+    timezone: America/Sao_Paulo
+    locale: en_US.UTF-8
+
+  roles:
+    - role: base
+      tags: base
+    - role: packages
+      tags: packages
+    - role: desktop
+      tags: desktop
+    - role: services
+      tags: services
+    - role: zsh
+      tags: zsh
+    - role: dotfiles
+      tags: dotfiles

@@ -1,0 +1,59 @@
+---
+- name: Enable LightDM
+  ansible.builtin.systemd:
+    name: lightdm
+    enabled: yes
+    state: started
+
+- name: Configure LightDM GTK greeter
+  ansible.builtin.copy:
+    content: |
+      [greeter]
+      theme-name = Adwaita
+      icon-theme-name = Adwaita
+      cursor-theme-name = Adwaita
+      background = 
+    dest: /etc/lightdm/lightdm-gtk-greeter.conf
+    mode: '0644'
+
+- name: Set LightDM as display manager
+  ansible.builtin.copy:
+    content: "DISPLAYMANAGER=lightdm\n"
+    dest: /etc/conf.d/display-manager
+    mode: '0644'
+  when: ansible_os_family == "Gentoo"
+  # Arch uses systemd, this file may not be needed
+
+- name: Create xorg config directory
+  ansible.builtin.file:
+    path: /etc/X11/xorg.conf.d
+    state: directory
+    mode: '0755'
+
+- name: Set keyboard layout for X11
+  ansible.builtin.copy:
+    content: |
+      Section "InputClass"
+          Identifier "system-keyboard"
+          MatchIsKeyboard "on"
+          Option "XkbLayout" "us"
+          Option "XkbVariant" "altgr-intl"
+      EndSection
+    dest: /etc/X11/xorg.conf.d/00-keyboard.conf
+    mode: '0644'
+
+- name: Configure auto-login for LightDM
+  ansible.builtin.lineinfile:
+    path: /etc/lightdm/lightdm.conf
+    regexp: '^#?autologin-user='
+    line: 'autologin-user={{ username }}'
+    insertafter: '\[Seat:\*\]'
+  notify: Restart LightDM
+
+- name: Ensure i3 config directory exists
+  ansible.builtin.file:
+    path: "{{ user_home }}/.config/i3"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0755'

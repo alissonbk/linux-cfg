@@ -1,0 +1,5 @@
+---
+- name: Restart LightDM
+  ansible.builtin.systemd:
+    name: lightdm
+    state: restarted

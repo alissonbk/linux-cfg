@@ -1,0 +1,71 @@
+# Enable Powerlevel10k instant prompt
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Oh My Zsh configuration
+export ZSH="$HOME/.oh-my-zsh"
+
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+plugins=(
+  git
+  sudo
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# Powerlevel10k config
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Enable completion
+autoload -U compinit && compinit
+
+# History settings
+HISTSIZE=10000
+SAVEHIST=10000
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+
+# Key bindings
+bindkey "^[[3~" delete-char
+bindkey "^[[1;5C" forward-word
+bindkey '^I' forward-word
+bindkey "^[[1;5D" backward-word
+bindkey '^[[Z' backward-word
+bindkey '\e[H' beginning-of-line
+bindkey '\e[F' end-of-line
+bindkey '\e[1~' beginning-of-line
+bindkey '\e[4~' end-of-line
+bindkey '^ ' autosuggest-accept
+
+# Exports
+export JAVA_HOME=/usr/lib/jvm/default
+export EDITOR="code --wait"
+
+# Aliases - Bat related
+alias cat="bat"
+alias diff="batdiff"
+alias rg="batgrep"
+alias man="batman"
+
+# Aliases - Navigation
+alias prj="cd $HOME/projects"
+alias scripts="cd $HOME/Apps"
+alias nixcfg="cd $HOME/src/nix-config"
+alias l="eza -lah"
+alias la="eza -lah"
+alias ll="eza -lh"
+alias ls="eza"
+alias lsa="eza -lah"
+
+# Aliases - Others
+alias get_idf=". $HOME/esp/esp-idf/export.sh"
+alias dblog="sh $HOME/Apps/pgLogs.sh"
+alias tsinit="sh $HOME/Apps/tsinit.sh"
+alias bfmt="numfmt --to=iec-i --suffix=B --format=\"%9.2f\""
+alias g="googler"

@@ -1,0 +1,60 @@
+---
+- name: Set timezone
+  community.general.timezone:
+    name: "{{ timezone }}"
+
+- name: Set locale.conf
+  ansible.builtin.copy:
+    content: |
+      LANG={{ locale_en }}
+      LC_ADDRESS={{ locale_ptbr }}
+      LC_IDENTIFICATION={{ locale_ptbr }}
+      LC_MEASUREMENT={{ locale_ptbr }}
+      LC_MONETARY={{ locale_ptbr }}
+      LC_NAME={{ locale_en }}
+      LC_NUMERIC={{ locale_ptbr }}
+      LC_PAPER={{ locale_ptbr }}
+      LC_TELEPHONE={{ locale_ptbr }}
+      LC_TIME={{ locale_ptbr }}
+    dest: /etc/locale.conf
+    mode: '0644'
+
+- name: Generate locale
+  ansible.builtin.command: locale-gen
+  changed_when: false
+
+- name: Set keyboard layout
+  ansible.builtin.copy:
+    content: "KEYMAP=us\n"
+    dest: /etc/vconsole.conf
+    mode: '0644'
+
+- name: Set hostname
+  ansible.builtin.hostname:
+    name: "{{ username }}"
+
+- name: Create user group
+  ansible.builtin.group:
+    name: "{{ username }}"
+    state: present
+
+- name: Create user with wheel group
+  ansible.builtin.user:
+    name: "{{ username }}"
+    groups:
+      - wheel
+      - docker
+      - podman
+      - dialout
+      - input
+      - networkmanager
+    shell: /bin/zsh
+    create_home: yes
+    state: present
+
+- name: Allow wheel group sudo without password
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'

@@ -1,0 +1,15 @@
+---
+locale_en: en_US.UTF-8
+locale_ptbr: pt_BR.UTF-8
+
+locale_settings:
+  LANG: "{{ locale_en }}"
+  LC_ADDRESS: "{{ locale_ptbr }}"
+  LC_IDENTIFICATION: "{{ locale_ptbr }}"
+  LC_MEASUREMENT: "{{ locale_ptbr }}"
+  LC_MONETARY: "{{ locale_ptbr }}"
+  LC_NAME: "{{ locale_en }}"
+  LC_NUMERIC: "{{ locale_ptbr }}"
+  LC_PAPER: "{{ locale_ptbr }}"
+  LC_TELEPHONE: "{{ locale_ptbr }}"
+  LC_TIME: "{{ locale_ptbr }}"

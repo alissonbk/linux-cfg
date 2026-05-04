@@ -1,0 +1,85 @@
+---
+- name: Ensure config directories exist
+  ansible.builtin.file:
+    path: "{{ user_home }}/.config/{{ item }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0755'
+  loop:
+    - i3
+    - alacritty
+    - hypr
+    - waybar
+    - ml4w
+    - zsh
+    - picom
+
+- name: Copy i3 config
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/../../dotfiles/.config/i3/"
+    dest: "{{ user_home }}/.config/i3/"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0644'
+  ignore_errors: yes
+
+- name: Copy alacritty config
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/../../dotfiles/.config/alacritty/"
+    dest: "{{ user_home }}/.config/alacritty/"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0644'
+  ignore_errors: yes
+
+- name: Copy hypr config
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/../../dotfiles/.config/hypr/"
+    dest: "{{ user_home }}/.config/hypr/"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0644'
+  ignore_errors: yes
+
+- name: Copy waybar config
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/../../dotfiles/.config/waybar/"
+    dest: "{{ user_home }}/.config/waybar/"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0644'
+  ignore_errors: yes
+
+- name: Copy scripts to ~/Apps
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/../../scripts/"
+    dest: "{{ user_home }}/Apps/"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0755'
+  ignore_errors: yes
+
+- name: Copy wallpapers
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/../../wallpapers/"
+    dest: "{{ user_home }}/wallpapers/"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0644'
+  ignore_errors: yes
+
+- name: Configure picom
+  ansible.builtin.copy:
+    content: |
+      [general]
+      fade = true
+      shadow = true
+      inactive-opacity = 0.8
+
+      [blur]
+      strength = 5
+    dest: "{{ user_home }}/.config/picom/picom.conf"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0644'

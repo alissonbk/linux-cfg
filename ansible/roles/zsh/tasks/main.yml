@@ -1,0 +1,65 @@
+---
+- name: Set zsh as default shell for user
+  ansible.builtin.user:
+    name: "{{ username }}"
+    shell: /bin/zsh
+
+- name: Ensure zsh config directory exists
+  ansible.builtin.file:
+    path: "{{ user_home }}/.config/zsh"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0755'
+
+- name: Install oh-my-zsh
+  ansible.builtin.git:
+    repo: https://github.com/ohmyzsh/ohmyzsh.git
+    dest: "{{ user_home }}/.oh-my-zsh"
+    version: master
+  become: no
+  environment:
+    HOME: "{{ user_home }}"
+
+- name: Install powerlevel10k theme
+  ansible.builtin.git:
+    repo: https://github.com/romkatv/powerlevel10k.git
+    dest: "{{ user_home }}/.oh-my-zsh/custom/themes/powerlevel10k"
+    version: master
+  become: no
+  environment:
+    HOME: "{{ user_home }}"
+
+- name: Install zsh autosuggestions plugin
+  ansible.builtin.git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: "{{ user_home }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    version: master
+  become: no
+  environment:
+    HOME: "{{ user_home }}"
+
+- name: Install zsh syntax highlighting plugin
+  ansible.builtin.git:
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting
+    dest: "{{ user_home }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    version: master
+  become: no
+  environment:
+    HOME: "{{ user_home }}"
+
+- name: Create .zshrc from template
+  ansible.builtin.template:
+    src: zshrc.j2
+    dest: "{{ user_home }}/.zshrc"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0644'
+
+- name: Create p10k config
+  ansible.builtin.template:
+    src: p10k.zsh.j2
+    dest: "{{ user_home }}/.p10k.zsh"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0644'

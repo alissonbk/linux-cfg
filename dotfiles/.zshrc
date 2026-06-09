@@ -35,10 +35,16 @@ alias bfmt="numfmt --to=iec-i --suffix=B --format=\"%9.2f\""
 alias dblog="sh ~/Apps/pgLogs.sh"
 alias get_idf=". /opt/esp-idf/export.sh"
 alias kill-monitor="ps -ef | grep \"idf.py monitor\" | awk 'NR==1 {print \$2}' | xargs -I {} kill -9 {}"
+alias prod-nix="ssh zeit@193.123.113.29"
 #alias postman-agent="exec ~/Apps/postman-agent/agent"
 
-alias prod-nix="ssh zeit@193.123.113.29"
+#bat-aliases
+#alias cat="bat"
+alias diff="batdiff"
+#alias grep="batgrep"
+alias ls="eza"
 alias update-qualis="sh ~/Apps/update-qualis-sqlite.sh"
+alias connect-adb="sh ~/Apps/connect-adb.sh"
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
@@ -64,5 +70,14 @@ bindkey "^[[1;5D" backward-word
 export EDITOR="code --wait"
 
 #fzf
-#source <(fzf --zsh)
+source <(fzf --zsh)
 JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+
+# opencode
+export PATH=/home/zeit/.opencode/bin:$PATH
+
+export XDG_SESSION_TYPE=x11
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

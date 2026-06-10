@@ -12,6 +12,7 @@ system_packages:
   - zsh
   - nix
   - vim
+  - docker
   - git
   - curl
   - wget
@@ -24,8 +25,7 @@ system_packages:
   - imagemagick
   - zip
   - unzip
-  - jq
-  - nitrogen
+  - jq  
   - redshift
   - flameshot
   - pulsemixer
@@ -58,11 +58,7 @@ system_packages:
   - picom
   - alacritty
   - firefox
-  - thunderbird
-  - code
-  - jetbrains-toolbox
-  - dejavu-fonts
-  - ttf-meslo-nerd
+  - thunderbird      
   - noto-fonts
   - linux-firmware
   - vulkan-intel
@@ -78,3 +74,7 @@ aur_packages:
   - spotify
   - bat-extras
   - archlinux-java
+  - nitrogen
+  - jetbrains-toolbox
+  - visual-studio-code-bin
+  - ttf-dejavu

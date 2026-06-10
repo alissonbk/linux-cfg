@@ -70,9 +70,11 @@ system_packages:
   - mesa
   - libva-intel-driver
   - xf86-video-intel
+  - jdk21-openjdk
 
 # AUR packages (require yay/paru)
 aur_packages:
   - google-chrome
   - spotify
   - bat-extras
+  - archlinux-java

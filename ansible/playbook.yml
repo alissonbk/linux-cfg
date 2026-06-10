@@ -1,7 +1,7 @@
 ---
 - name: Configure Arch Linux workstation
   hosts: all
-  become: yes
+  become: True
   vars:
     username: alissonbk
     user_home: "/home/{{ username }}"

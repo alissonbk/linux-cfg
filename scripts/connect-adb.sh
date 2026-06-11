@@ -1,13 +1,8 @@
 #!/usr/bin/env bash
-
 IP="${1:-192.168.75.107}"
 
-PORT=$(nmap -Pn -sT -T5 -p 30000-65535 "$IP" \
-    | awk '/tcp[[:space:]]+open/ {
-        split($1,a,"/");
-        print a[1];
-        exit
-    }')
+PORT=$(rustscan -a "$IP" --range 30000-65535 --ulimit 5000 -b 1000 2>/dev/null \
+    | awk -F: '/^Open / { print $2; exit }')
 
 if [[ -z "$PORT" ]]; then
     echo "No open TCP port found on $IP"

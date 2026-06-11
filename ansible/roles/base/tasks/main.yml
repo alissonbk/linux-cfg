@@ -42,12 +42,9 @@
   ansible.builtin.user:
     name: "{{ username }}"
     groups:
-      - wheel
-      - docker
-      - podman
-      - dialout
-      - input
-      - networkmanager
+      - wheel          
+      - uucp
+      - input      
     shell: /bin/zsh
     create_home: yes
     state: present

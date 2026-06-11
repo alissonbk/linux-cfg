@@ -24,6 +24,7 @@
         state: present
 
     - name: Clone yay
+      become: false
       ansible.builtin.git:
         repo: https://aur.archlinux.org/yay.git
         dest: /tmp/yay
@@ -32,7 +33,7 @@
       ansible.builtin.command: makepkg -si --noconfirm
       args:
         chdir: /tmp/yay
-      become: no
+      become: false
       environment:
         HOME: "{{ user_home }}"
       register: yay_build
@@ -46,7 +47,7 @@
 - name: Install AUR packages with yay
   ansible.builtin.command: "yay -S --noconfirm {{ item }}"
   loop: "{{ aur_packages }}"
-  become: no
+  become: false
   environment:
     HOME: "{{ user_home }}"
   register: aur_install
@@ -56,3 +57,4 @@
 - name: Refresh font cache
   ansible.builtin.command: fc-cache -fv
   changed_when: false
+

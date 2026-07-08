@@ -17,7 +17,7 @@
 
 - name: Copy i3 config
   ansible.builtin.copy:
-    src: "{{ playbook_dir }}/../../dotfiles/.config/i3/"
+    src: "{{ playbook_dir }}/../dotfiles/.config/i3/"
     dest: "{{ user_home }}/.config/i3/"
     owner: "{{ username }}"
     group: "{{ username }}"
@@ -26,7 +26,7 @@
 
 - name: Copy alacritty config
   ansible.builtin.copy:
-    src: "{{ playbook_dir }}/../../dotfiles/.config/alacritty/"
+    src: "{{ playbook_dir }}/../dotfiles/.config/alacritty/"
     dest: "{{ user_home }}/.config/alacritty/"
     owner: "{{ username }}"
     group: "{{ username }}"
@@ -35,7 +35,7 @@
 
 - name: Copy hypr config
   ansible.builtin.copy:
-    src: "{{ playbook_dir }}/../../dotfiles/.config/hypr/"
+    src: "{{ playbook_dir }}/../dotfiles/.config/hypr/"
     dest: "{{ user_home }}/.config/hypr/"
     owner: "{{ username }}"
     group: "{{ username }}"
@@ -44,7 +44,7 @@
 
 - name: Copy waybar config
   ansible.builtin.copy:
-    src: "{{ playbook_dir }}/../../dotfiles/.config/waybar/"
+    src: "{{ playbook_dir }}/../dotfiles/.config/waybar/"
     dest: "{{ user_home }}/.config/waybar/"
     owner: "{{ username }}"
     group: "{{ username }}"
@@ -53,7 +53,7 @@
 
 - name: Copy scripts to ~/Apps
   ansible.builtin.copy:
-    src: "{{ playbook_dir }}/../../scripts/"
+    src: "{{ playbook_dir }}/../scripts/"
     dest: "{{ user_home }}/Apps/"
     owner: "{{ username }}"
     group: "{{ username }}"
@@ -62,7 +62,7 @@
 
 - name: Copy wallpapers
   ansible.builtin.copy:
-    src: "{{ playbook_dir }}/../../wallpapers/"
+    src: "{{ playbook_dir }}/../wallpapers/"
     dest: "{{ user_home }}/wallpapers/"
     owner: "{{ username }}"
     group: "{{ username }}"
